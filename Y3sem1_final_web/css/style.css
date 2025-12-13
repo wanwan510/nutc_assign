@@ -1,3 +1,7 @@
 .chicken-img{
     image-rendering: pixelated;
 }
+
+header,section,footer{
+    background-color: aliceblue;
+}
