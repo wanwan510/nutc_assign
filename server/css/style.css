@@ -1,0 +1,87 @@
+:root {
+  --bg-color: #000C1F;
+  --text-color: #E5E5E5;
+  --nav-bg: rgba(0, 12, 31, 0.8); /* 帶透明度的深藍色 */
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  margin: 0;
+  /* 為了讓滾動觸發有空間，我們先給 body 一個高度 */
+  height: 200vh; 
+}
+
+.navbar {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 50px;
+  background-color: var(--nav-bg);
+  /* 2. Apple 風格的磨砂玻璃效果 */
+  backdrop-filter: blur(15px); 
+  z-index: 1000;
+}
+
+.gallery {
+  padding: 100px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 150px; /* 讓卡片之間有足夠的滾動空間 */
+}
+
+.work-card {
+  width: 80%;
+  max-width: 900px;
+  height: 500px;
+  border-radius: 30px;
+  overflow: hidden;
+  position: relative;
+  border: 1px solid rgba(168, 85, 247, 0.2); /* 淡淡的紫色邊框 */
+  background: #000;
+}
+
+.work-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.submit-btn {
+  /* 基礎樣式：使用你的淺灰色與深藍背景 */
+  background-color: transparent;
+  color: #E5E5E5; 
+  border: 2px solid #E5E5E5;
+  padding: 12px 30px;
+  border-radius: 50px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1); /* 讓縮放更順滑 */
+  outline: none;
+}
+
+.submit-btn:hover {
+  /* 1. 顏色切換：邊框與文字變亮紫色 */
+  border-color: #A855F7;
+  color: #A855F7;
+
+  /* 2. 磁吸縮放：輕微放大 */
+  transform: scale(1.05);
+
+  /* 3. 磁吸發光：亮紫色的陰影擴散 */
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.6), 
+              0 0 40px rgba(168, 85, 247, 0.2);
+  
+  /* 4. 字體稍微加亮 */
+  text-shadow: 0 0 8px rgba(168, 85, 247, 0.5);
+}
+
+.submit-btn:active {
+  /* 點擊時輕微縮小，增加反饋感 */
+  transform: scale(0.98);
+}
+
