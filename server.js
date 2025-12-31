@@ -16,27 +16,27 @@ server.use(fileUpload({limits:{fileSize:2*1024*1024}}))
 var DB=require("nedb-promises");
 var ContactDB = DB.create(__dirname+"/Contact.db");
 
-server.get("/contact", (req, res) => {
-    ContactDB.find({}).then(results=>{
-        res.send(results);
-    })
-});
+// server.get("/contact", (req, res) => {
+//     ContactDB.find({}).then(results=>{
+//         res.send(results);
+//     })
+// });
 
 server.post("/contact", (req, res) =>{
     ContactDB.insert(req.body);
     //move to public/upload
-    var upFile=req.files.myFile1;
-    upFile.mv(__dirname+"/public/upload/"+upFile.name, function(err){
-        if(err==null){
-            res.render("msg",{message:"I got a file: "+upFile.name})
-        }else{
-            res.render("msg",{message:err});
-        }
+    // var upFile=req.files.myFile1;
+    // upFile.mv(__dirname+"/public/upload/"+upFile.name, function(err){
+    //     if(err==null){
+    //         res.render("msg",{message:"I got a file: "+upFile.name})
+    //     }else{
+    //         res.render("msg",{message:err});
+    //     }
     })
     ContactDB.find({}).then(results=>{
         res.send(results);
     })
-})
+
 
 
 server.listen(80)
