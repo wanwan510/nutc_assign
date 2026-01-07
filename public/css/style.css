@@ -1,118 +1,76 @@
-:root {
-  --bg-color: #000C1F;
-  --text-color: #E5E5E5;
-  --nav-bg: rgba(0, 12, 31, 0.8); /* 帶透明度的深藍色 */
-}
 
-body {
-  background-color: var(--bg-color);
-  color: var(--text-color);
-  margin: 0;
-  /* 為了讓滾動觸發有空間，我們先給 body 一個高度 */
-  height: 200vh; 
+:root{
+--bg:#0B1C2D;
+--panel:#12283F;
+--white:#FFFFFF;
+--gray:#9FB0C3;
+--accent:#5EE7FF;
 }
 
 
-.navbar {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px 50px;
-  background-color: var(--nav-bg);
-  /* 2. Apple 風格的磨砂玻璃效果 */
-  backdrop-filter: blur(15px); 
-  z-index: 1000;
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+font-family:'Inter','Noto Sans TC','PingFang TC',sans-serif;
+background:var(--bg);
+color:var(--white);
+overflow-x:hidden;
 }
 
-body, html {
-    height: 100%;
-}
-.hero-image {
-  /* Use "linear-gradient" to add a darken background effect to the image (photographer.jpg). This will make the text easier to read */
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("img/hero.jpg");
 
-  /* Set a specific height */
-  height: 50%;
+/* Swiss Grid */
+.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:24px;padding:0 8vw;}
 
-  /* Position and center the image to scale nicely on all screens */
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  position: relative;
+
+nav{
+position:fixed;top:0;left:0;width:100%;z-index:1000;
+padding:24px 8vw;display:flex;justify-content:space-between;
+backdrop-filter:blur(10px);
 }
 
-/* Place text in the middle of the image */
-.hero-text {
-  text-align: center;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: white;
-}
+nav a{color:var(--white);text-decoration:none;margin-left:32px;font-weight:300;}
 
-.gallery {
-  padding: 100px 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 150px; /* 讓卡片之間有足夠的滾動空間 */
-}
 
-.work-card {
-  width: 80%;
-  max-width: 900px;
-  height: 500px;
-  border-radius: 30px;
-  overflow: hidden;
-  position: relative;
-  border: 1px solid rgba(168, 85, 247, 0.2); /* 淡淡的紫色邊框 */
-  background: #000;
-}
+section{padding:160px 0;}
 
-.work-card img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
 
-/* Style inputs with type="text", select elements and textareas */
-input[type=text], select, textarea {
-  width: 100%; /* Full width */
-  padding: 12px; /* Some padding */ 
-  border: 1px solid #ccc; /* Gray border */
-  border-radius: 4px; /* Rounded borders */
-  box-sizing: border-box; /* Make sure that padding and width stays in place */
-  margin-top: 6px; /* Add a top margin */
-  margin-bottom: 16px; /* Bottom margin */
-  resize: vertical /* Allow the user to vertically resize the textarea (not horizontally) */
-}
+/* HERO */
+.hero{height:100vh;display:flex;align-items:center;padding:0 8vw;}
+.hero h1{font-size:clamp(3rem,8vw,7rem);font-weight:800;line-height:1.1;}
+.hero span{color:var(--accent);}
+.hero p{margin-top:32px;color:var(--gray);max-width:460px;}
+#hero-image{position:relative;bottom:0;right:8vw;width:25vw;}
 
-/* Style the submit button with a specific background color etc */
-input[type=submit] {
-  background-color: #04AA6D;
-  color: white;
-  padding: 12px 20px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
 
-/* When moving the mouse over the submit button, add a darker green color */
-input[type=submit]:hover {
-  background-color: #45a049;
-}
+/* PIN SPACE */
+#vision{width:15vw;}
+.pin{height:200vh;}
+.space{position:sticky;top:0;height:100vh;display:flex;align-items:center;justify-content:center;}
+.space img{width:18vw;}
+ 
+/* WORKS */
+h2{font-size:3rem;margin-bottom:64px;font-weight:700;}
+.card{grid-column:span 6;padding:48px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.03);}
+.card h3{font-size:2rem;margin-bottom:16px;color: #FFFFFF;}
+.card p{line-height:1.6;color: #FFFFFF;}
+.tag{font-size:.75rem;color:var(--gray);letter-spacing:.08em;text-transform:uppercase;}
+#anim{width: 375px; height: 500px;}
+#game{width: 329px; height: 500px;}
+#remix{width: 350px; height: 250px;}
+#ai-comp{width: 250px; height: 250px;}
 
-/* Add a background color and some padding around the form */
-.container {
-  border-radius: 5px;
-  background-color: #84b0d4;
-  padding: 20px;
+/* STATEMENT */
+.statement{grid-column:span 8;font-size:1.2rem;line-height:1.8;color:var(--gray);}
+
+
+footer{padding:80px 8vw;border-top:1px solid rgba(255,255,255,.15);color:var(--gray);}
+
+
+/* RWD */
+@media(max-width:900px){
+.grid{grid-template-columns:1fr;padding:0 6vw;}
+.card,.statement{grid-column:span 1;}
+.space img{width:50vw;}
 }
-  
 
 .submit-btn {
   /* 基礎樣式：使用你的淺灰色與深藍背景 */
