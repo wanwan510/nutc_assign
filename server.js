@@ -24,21 +24,20 @@ var ContactDB = DB.create(__dirname+"/Contact.db");
 //     })
 // });
 
-server.post("/contact", (req, res) =>{
-    ContactDB.insert(req.body);
-    //move to public/upload
-    // var upFile=req.files.myFile1;
-    // upFile.mv(__dirname+"/public/upload/"+upFile.name, function(err){
-    //     if(err==null){
-    //         res.render("msg",{message:"I got a file: "+upFile.name})
-    //     }else{
-    //         res.render("msg",{message:err});
-    //     }
-    })
-    ContactDB.find({}).then(results=>{
-        res.send(results);
-    })
+
+    server.post("/contact", (req, res) => {
+        console.log("收到前端資料:", req.body);
+    // 1. 先插入資料
+    ContactDB.insert(req.body).then(() => {
+        console.log("成功存入資料庫:", doc); // 確認資料庫是否回傳成功物件
+        // 2. 資料插入成功後，再查詢所有結果並回傳
+        return ContactDB.find({});
+    }).then(results => {
+        res.send(results);// 回傳所有聯絡人資料
+    }).catch(err => {
+        res.status(500).send("資料庫錯誤");
+    });
+}); 
 
 
-
-server.listen(80)
+server.listen(3001)
