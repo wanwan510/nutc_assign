@@ -1,143 +1,641 @@
+:root {
+    --bg: #0B1C2D;
+    --panel: #12283F;
+    --white: #FFFFFF;
+    --gray: #9FB0C3;
+    --accent: #5EE7FF;
+    --purple: #A855F7;
+    --cosmic-pink: #FF6B9D;
+}
 
-:root{
---bg:#0B1C2D;
---panel:#12283F;
---white:#FFFFFF;
---gray:#9FB0C3;
---accent:#5EE7FF;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: #000;
+    color: var(--white);
+    overflow-x: hidden;
+    line-height: 1.6;
+}
+
+/* Swiss Grid System */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 24px;
+    padding: 0 8vw;
+    max-width: 1800px;
+    margin: 0 auto;
+}
+
+/* Navigation */
+nav {
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    padding: 20px 8vw;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+nav.scrolled {
+    padding: 12px 8vw;
+    background: rgba(0, 0, 0, 0.9);
+}
+
+.nav-container {
+    max-width: 1800px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    color: var(--white);
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.nav-links {
+    display: flex;
+    gap: 40px;
+    list-style: none;
+}
+
+.nav-links a {
+    color: var(--gray);
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 300;
+    letter-spacing: 0.08em;
+    transition: color 0.3s ease;
+    text-transform: uppercase;
+}
+
+.nav-links a:hover {
+    color: var(--accent);
+}
+
+/* Hamburger Menu */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 8px;
+}
+
+.hamburger span {
+    width: 24px;
+    height: 2px;
+    background: var(--white);
+    transition: all 0.3s ease;
+    z-index: 1;
+}
+
+.hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(7px, 7px);
+}
+
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -7px);
+}
+
+.mobile-menu {
+    display: none;
+    position: fixed;
+    top: 60px;
+    right: 0;
+    width: 280px;
+    height: calc(100vh - 60px);
+    background: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(20px);
+    padding: 32px;
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+    transform: translateX(100%);
+    transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    z-index: 1;
+}
+
+.mobile-menu.active {
+    transform: translateX(0);
+
+}
+
+.mobile-menu a {
+    display: block;
+    color: var(--white);
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-weight: 300;
+    margin-bottom: 24px;
+    transition: color 0.3s ease;
+
+}
+
+.mobile-menu a:hover {
+    color: var(--accent);
+
+}
+
+/* Hero Section */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 120px 8vw 80px;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-bg {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, rgba(94, 231, 255, 0.1) 0%, rgba(0, 0, 0, 0.9) 60%);
+    z-index: 0;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 1200px;
+}
+
+.hero h1 {
+    font-size: clamp(3rem, 8vw, 7rem);
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 24px;
+    opacity: 0;
+    transform: translateY(40px);
+}
+
+.hero h1 span {
+    color: var(--accent);
+    display: block;
+}
+
+.hero p {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    color: var(--gray);
+    max-width: 600px;
+    line-height: 1.8;
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.hero-cta {
+    margin-top: 48px;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.cta-button {
+    display: inline-block;
+    padding: 16px 40px;
+    background: transparent;
+    border: 2px solid var(--accent);
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+    text-transform: uppercase;
+    font-size: 0.875rem;
+}
+
+.cta-button:hover {
+    background: var(--accent);
+    color: #000;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 40px rgba(94, 231, 255, 0.4);
+}
+
+/* Scroll Trigger */
+.cosmic-section {
+    height: 400vh;
+    position: relative;
+    background: #000;
+}
+
+.cosmic-container {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.cosmic-image {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.7);
+    will-change: transform, filter;
+}
+
+/* 多層視差元素 */
+.parallax-layer {
+    position: absolute;
+    inset: 0;
+    /* 等同 top:0; right:0; bottom:0; left:0 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cosmic-text {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    color: var(--white);
+    opacity: 0;
+}
+
+.cosmic-text h2 {
+    font-size: clamp(2rem, 6vw, 5rem);
+    font-weight: 800;
+    margin-bottom: 24px;
+    background: linear-gradient(135deg, #5EE7FF 0%, #A855F7 50%, #FF6B9D 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.cosmic-text p {
+    font-size: clamp(1rem, 2vw, 1.5rem);
+    color: rgba(255, 255, 255, 0.8);
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+/* Particle Effects */
+.particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: rgba(94, 231, 255, 0.8);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+/* Works Section */
+.section-title {
+    grid-column: span 12;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 700;
+    margin-bottom: 80px;
+    letter-spacing: -0.02em;
+}
+
+.work-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+.work-item img {
+    aspect-ratio: 4 / 3;
+    /* 設定固定比例 */
+    width: 100%;
+    object-fit: cover;
+}
+
+.work-item::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    pointer-events: none;
+    transition: border 0.3s ease;
+}
+
+.work-item:hover {
+    transform: translateY(-8px);
+}
+
+.work-item:hover::after {
+    border-color: var(--accent);
+}
+
+.work-item:hover .work-title {
+    color: #601EF9;
+}
+
+.work-title {
+    margin-top: 40px;
+    font-size: 2rem;
+    font-weight: 600;
+    color: aliceblue;
+    letter-spacing: 0.08em;
 }
 
 
-*{margin:0;padding:0;box-sizing:border-box;}
-body{
-font-family:'Inter','Noto Sans TC','PingFang TC',sans-serif;
-background:var(--bg);
-color:var(--white);
-overflow-x:hidden;
+
+/* About Section */
+.about-section {
+    padding: 160px 0;
+    background: rgba(18, 40, 63, 0.3);
+    position: relative;
+}
+
+.statement-text {
+    grid-column: span 8;
+    font-size: 1.25rem;
+    line-height: 2;
+    color: var(--gray);
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+/* About Me 擴充樣式 */
+/* core skill tree title */
+.skill-tree-wrapper {
+    position: relative;
+    padding: 100px 0;
+    /* 3d Perspective */
+    perspective: 1000px;
+    overflow: hidden;
+    background: radial-gradient(circle at center, rgba(94, 231, 255, 0.03) 0%, transparent 70%);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+
+}
+
+.skill-tree-wrapper h3.work-tag {
+    color: rgba(255, 255, 255, 0.4);
+    /* 初始調暗，比 0.6 更具神祕感 letter-spacing 0.8s ease; */
+    text-align: center;
+    transform: translateZ(-50px);
+    display: block;
+    transition: color 0.8s ease;
+    letter-spacing: 0.1em;
+}
+
+/* 當容器被注視（Hover）時的狀態 */
+.skill-tree-wrapper:hover h3.work-tag {
+    color: rgba(255, 255, 255, 1);
+    letter-spacing: 0.2em;
+    /* 輕微展開，增加視覺張力 */
+    text-shadow: 0 0 15px rgba(94, 231, 255, 0.5);
+}
+
+.skill-categories {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.skill-cat:hover {
+    transform: translateX(10px);
+    /* x = right */
+    background: linear-gradient(90deg, rgba(94, 231, 255, 0.1) 0%, transparent 100%);
+}
+
+.skill-cat {
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.05) 0%, transparent 100%);
+    padding: 24px;
+    border-radius: 4px;
+    border-left: 2px solid var(--accent);
+    margin-bottom: 24px;
+    transition: transform 0.3s ease;
+}
+
+/* Skill Tree 節點樣式 */
+.skill-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+    justify-content: center;
+    align-items: center;
+    padding: 60px 0;
+    width: 100%;
+    max-width: 800px;
+    margin: 40px auto 0;
+    transform-style: preserve-3d;
+}
+
+.skill-node::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: 0.5s;
+}
+
+.skill-node:hover::before {
+    left: 100%;
+}
+
+.skill-node {
+    padding: 12px 28px;
+    border: 1px solid rgba(94, 231, 255, 0.4);
+    background: rgba(94, 231, 255, 0.05);
+    color: var(--accent);
+    font-weight: 500;
+    letter-spacing: 1px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    transform: translateZ(20px);
+    cursor: default;
+}
+
+.skill-node:hover {
+    border-color: var(--accent);
+    box-shadow: 0 0 20px rgba(94, 231, 255, 0.4);
+    transform: translateY(-5px);
+    background: rgba(94, 231, 255, 0.1);
 }
 
 
-/* Swiss Grid */
-.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:24px;padding:0 8vw;}
 
+/* Contact Section */
+.contact-section {
+    padding: 160px 0;
+    background: linear-gradient(180deg, #0B1C2D 0%, #000 100%);
 
-nav{
-position:fixed;top:0;left:0;width:100%;z-index:1000;
-padding:24px 8vw;display:flex;justify-content:space-between;
-backdrop-filter:blur(10px);
 }
 
-nav a{color:var(--white);text-decoration:none;margin-left:32px;font-weight:300;}
+.contact-form {
+    grid-column: 4 / span 6;
+    padding: 40px;
+    background: rgba(255, 255, 255, 0.03);
+    /* 極低的透明度 */
+    backdrop-filter: blur(15px) saturate(180%);
+    /* 磨砂感 + 色彩飽和度提升 */
+    -webkit-backdrop-filter: blur(15px) saturate(180%);
 
+    /* 關鍵：半透明邊框模擬玻璃厚度 */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
 
-section{padding:160px 0;}
+    /* 雙層陰影：外發光 + 內陰影 */
+    box-shadow:
+        0 8px 32px 0 rgba(0, 0, 0, 0.8),
+        inset 0 0 1px 1px rgba(255, 255, 255, 0.05);
 
-
-/* HERO */
-.hero{height:100vh;display:flex;align-items:center;padding:0 8vw;}
-.hero h1{font-size:clamp(3rem,8vw,7rem);font-weight:800;line-height:1.1;}
-.hero span{color:var(--accent);}
-.hero p{margin-top:32px;color:var(--gray);max-width:460px;}
-#hero-image{position:relative;bottom:0;right:8vw;width:25vw;}
-
-
-/* PIN SPACE */
-#vision{width:15vw;}
-.pin{height:200vh;}
-.space{position:sticky;top:0;height:100vh;display:flex;align-items:center;justify-content:center;}
-.space img{width:18vw;}
- 
-/* WORKS */
-h2{font-size:3rem;margin-bottom:64px;font-weight:700;}
-.card{grid-column:span 6;padding:48px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.03);}
-.card h3{font-size:2rem;margin-bottom:16px;color: #FFFFFF;}
-.card p{line-height:1.6;color: #FFFFFF;}
-.tag{font-size:.75rem;color:var(--gray);letter-spacing:.08em;text-transform:uppercase;}
-#anim{width: 375px; height: 500px;}
-#game{width: 329px; height: 500px;}
-#remix{width: 350px; height: 250px;}
-#ai-comp{width: 250px; height: 250px;}
-
-/* STATEMENT */
-.statement{grid-column:span 8;font-size:1.2rem;line-height:1.8;color:var(--gray);}
-
-
-footer{padding:80px 8vw;border-top:1px solid rgba(255,255,255,.15);color:var(--gray);}
-
-
-/* RWD */
-@media(max-width:900px){
-.grid{grid-template-columns:1fr;padding:0 6vw;}
-.card,.statement{grid-column:span 1;}
-.space img{width:50vw;}
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
-/* contact form */
-/* Style inputs with type="text", select elements and textareas */
-input[type=text], select, textarea {
-  width: 100%; /* Full width */
-  padding: 12px; /* Some padding */ 
-  border: 1px solid #ccc; /* Gray border */
-  border-radius: 4px; /* Rounded borders */
-  box-sizing: border-box; /* Make sure that padding and width stays in place */
-  margin-top: 6px; /* Add a top margin */
-  margin-bottom: 16px; /* Bottom margin */
-  resize: vertical /* Allow the user to vertically resize the textarea (not horizontally) */
+.form-group {
+    margin-bottom: 32px;
 }
 
-/* Style the submit button with a specific background color etc */
-input[type=submit] {
-  background-color: #04AA6D;
-  color: white;
-  padding: 12px 20px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
+/* 放置在 contact-form 後方的裝飾球 */
+.glass-bg-blob {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
+    filter: blur(60px);
+    opacity: 0.15;
+    z-index: -1;
+    top: 20%;
+    left: 10%;
+    animation: blob-float 10s infinite alternate;
 }
 
-/* When moving the mouse over the submit button, add a darker green color */
-input[type=submit]:hover {
-  background-color: #45a049;
+@keyframes blob-float {
+    from { transform: translate(0, 0); }
+    to { transform: translate(50px, 30px); }
 }
 
-/* Add a background color and some padding around the form */
-.container {
-  border-radius: 5px;
-  background-color: #290a7e;
-  padding: 20px;
+.form-group label {
+    display: block;
+    font-size: 0.875rem;
+    color: var(--gray);
+    margin-bottom: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.form-group input,
+.form-group textarea {
+    background: rgba(255, 255, 255, 0.02) !important;
+    border-radius: 4px;
+    padding: 16px 12px !important;
+    /* 增加一點內縮 */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    background: rgba(94, 231, 255, 0.05) !important;
+    border-bottom-color: var(--accent) !important;
+    box-shadow: 0 10px 20px -10px rgba(94, 231, 255, 0.3);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 120px;
 }
 
 .submit-btn {
-  /* 基礎樣式：使用你的淺灰色與深藍背景 */
-  background-color: transparent;
-  color: #E5E5E5; 
-  border: 2px solid #E5E5E5;
-  padding: 12px 30px;
-  border-radius: 50px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1); /* 讓縮放更順滑 */
-  outline: none;
+    background: transparent;
+    color: var(--white);
+    border: 2px solid var(--white);
+    padding: 16px 48px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+    text-transform: uppercase;
 }
 
 .submit-btn:hover {
-  /* 1. 顏色切換：邊框與文字變亮紫色 */
-  border-color: #A855F7;
-  color: #A855F7;
-
-  /* 2. 磁吸縮放：輕微放大 */
-  transform: scale(1.05);
-
-  /* 3. 磁吸發光：亮紫色的陰影擴散 */
-  box-shadow: 0 0 20px rgba(168, 85, 247, 0.6), 
-              0 0 40px rgba(168, 85, 247, 0.2);
-  
-  /* 4. 字體稍微加亮 */
-  text-shadow: 0 0 8px rgba(168, 85, 247, 0.5);
+    border-color: var(--purple);
+    color: var(--purple);
+    transform: scale(1.05);
+    box-shadow: 0 0 40px rgba(168, 85, 247, 0.5);
 }
 
 .submit-btn:active {
-  /* 點擊時輕微縮小，增加反饋感 */
-  transform: scale(0.98);
+    transform: scale(0.98);
 }
 
+/* Footer */
+footer {
+    padding: 80px 8vw;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+    color: var(--gray);
+    font-size: 0.875rem;
+    background: #000;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .grid {
+        padding: 0 6vw;
+    }
+
+    .work-card {
+        grid-column: span 12;
+    }
+
+    .statement-text {
+        grid-column: span 12;
+    }
+
+    .contact-form {
+        grid-column: span 12;
+    }
+}
+
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+
+    .mobile-menu {
+        display: block;
+    }
+
+    .work-card {
+        padding: 32px;
+    }
+
+    .grid {
+        gap: 16px;
+    }
+
+    .cosmic-section {
+        height: 300vh;
+    }
+}

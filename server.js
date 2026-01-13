@@ -1,6 +1,8 @@
 var express = require("express");
 var server = express();
 var bodyParser = require("body-parser");
+// const Datastore = require('nedb-promise');
+// const db = new Datastore({ filename: 'contacts.db', autoload: true });
 
 
 server.set("view engine", 'ejs');

@@ -12,9 +12,8 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <!-- gsap -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/Draggable.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
   <!-- font-family -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
@@ -22,172 +21,414 @@
 
 <body>
   <header>
-    <!-- HERO IMAGE -->
-    <section class="hero">
-
-      <div class="overlay-text">
-        <div>
-          <img id="" src="img/hero.jpg" alt="Hero Image" class="background-image">
-          <h1>Swiss Interface <br><span>My Spatial</span><br>Portfolio</h1>
-          <!-- <p>A Multidesign student portfolio website showcasing various projects and skills.</p> -->
-          <p>Based on Swiss design and combined with the concept of spatial computing, it explores how digital works are
-            "approached, seen and perceived".</p>
-        </div>
-    </section>
-
-    <!-- navbar -->
-
+    <!-- nav bar -->
     <nav class="navbar navbar-expand-sm bg-muted navbar-dark fixed-top">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#"><img src="img/my-logo.png" alt="Portfolio Logo" style="width:40px;"
-            class="rounded-pill"></a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-          data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent"
-          aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav">
-            <li class="nav-item"><a class="nav-link" href="#works">Works</a></li>
-            <li class="nav-item"><a class="nav-link" href="#statement">Concept</a></li>
-            <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-    <div class="collapse position-absolute end-0 mt-2 me-2" id="navbarToggleExternalContent"
-      style="z-index: 1050; min-width: 200px;">
-      <div class="bg-dark p-4 rounded shadow">
-        <a href="#works" class="d-block text-white h4 text-decoration-none mb-2">Works</a>
-        <a href="#statement" class="d-block text-white h4 text-decoration-none mb-2">Concept</a>
-        <a href="#contact" class="d-block text-white h4 text-decoration-none mb-2">Contact</a>
-        <a href="#" class="text-muted text-decoration-none">Click here to navigate</a>
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#"><img src="img/my-logo.png" alt="Portfolio Logo" style="width:40px;"
+          class="rounded-pill">Portfolio</a>
+      <ul class="nav-links">
+        <li><a href="#works">Works</a></li>
+        <li><a href="#statement">About Me</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <div class="hamburger" id="hamburger">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
       </div>
     </div>
-    <!-- <p><strong>
-        <p>A multidesign student portfolio website showcasing various projects and skills.</p>
-      </strong></p> -->
+  </nav>
+
+   <div class="mobile-menu" id="mobileMenu">
+    <!-- <a href="#cosmic">Vision</a> -->
+    <a href="#works">Works</a>
+    <a href="#statement">About Me</a>
+    <a href="#contact">Contact</a>
+  </div>
   </header>
 
   <main>
-    <!-- SPATIAL PIN -->
-    <section class="pin">
-      <div class="space">
-        <img id="vision" src="img/vision.png" alt="Spatial Object">
+    <!-- scroll trigger -->
+      <section class="cosmic-section" id="cosmic">
+    <div class="cosmic-container">
+      <div class="parallax-layer" id="cosmicLayer">
+        <img src="img/star.png" alt="Cosmic Meditation" class="cosmic-image" id="cosmicImage">
       </div>
-    </section>
+
+      <div class="cosmic-text" id="cosmicText">
+        <h2>Wan Portfolio</h2>
+        <p>Journey through the system learning of Multimedia department.</p>
+      </div>
+    </div>
+  </section>
 
     <!-- WORKS -->
-    <section id="works">
-      <div class="grid">
-        <h2 style="grid-column:span 12">Selected Works</h2>
+    <section class="work-card py-5" id="works">
+    <div class="container">
+      <div class="row g-4 justify-content-center ">
 
-        <div class="card">
-          <span class="tag">Sound / Remix</span>
-          <img id="remix" src="img/remix.png" alt="Music Remix Project">
-          <h3>Electronic Music Remix</h3>
-          <p>以節奏拆解與重組為手法，將聲音視為可被操作的空間元素。</p>
-        </div>
-
-        <div class="card">
-          <span class="tag">AI / Visual</span>
-          <img id="ai-comp" src="img/ai-comp.jpg" alt="AI Competition">
-          <h3>Award-winning AI Image</h3>
-          <p>透過人與 AI 的共創流程，重新定義作者與生成之間的界線。</p>
-        </div>
-
-        <div class="card">
-          <span class="tag">Interaction / Game</span>
-          <img id="game" src="img/game.png" alt="Mini Game">
-          <h3>Symbol-based Mini Game</h3>
-          <p>以手勢與符號辨識作為核心互動邏輯，探討玩家與系統之間的即時回饋關係。</p>
-        </div>
-
-
-        <div class="card">
-          <span class="tag">Animation</span>
-          <img id="anim" src="img/anim.png" alt="Puppet Animation">
-          <h3>Stop-motion Puppet Animation</h3>
-          <p>透過逐格拍攝，呈現實體物件在時間軸上的敘事可能性。</p>
-        </div>
-      </div>
-    </section>
-    <!-- <div class="actions">
-        <button class="prev btn btn-primary">Prev</button>
-        <button class="next btn btn-primary">Next</button>
-      </div> -->
-
-
-    <!-- <section id="about-section" class="about-section">
-      <div class="container about-flex">
-        <div class="about-image">
-          <img src="profile.jpg" alt="Your Name">
-        </div>
-        <div class="about-content">
-          <h1>About Me</h1>
-          <h3>Multimedia Design student</h3>
-          <p>Start with a short introduction. Highlight your key background, experience, and interests in digestible
-            sections.</p>
-          <div class="skills">
-            <span>Coding</span>
-            <span>Design</span>
-            <span>Project Management</span>
+        <div class="col-6 col-md-6 text-center">
+          <div class="work-item">
+            <img src="img/ai-comp.jpg" class="img-fluid" alt="AI Competition">
+            <h5 class="work-title mt-3">AI Art Competition</h5>
+            <p>Second Place in DAO Arena: AI Creation contest</p>
           </div>
-          <a href="resume.pdf" class="btn">Download CV</a>
+        </div>
+
+        <div class="col-6 col-md-6 text-center">
+          <div class="work-item">
+            <img src="img/remix.png" class="card-img-top" alt="Music Remix Project">
+            <h5 class="work-title mt-3 ">Music Remix Project</h5>
+            <p> A derivative work featuring a rearranged instrumental track and added sound effects.</p>
+          </div>
+        </div>
+
+        <div class="col-6 col-md-6 text-center">
+          <div class="work-item">
+            <img src="img/game.png" class="img-fluid" alt="Symbol-based Mini Game">
+            <h5 class="work-title mt-3">Symbol-based Mini Game</h5>
+            <p>Interactive mini-game utilizing gesture and symbol recognition as core mechanics.</p>
+          </div>
+        </div>
+
+        <div class="col-6 col-md-6 text-center">
+          <div class="work-item">
+            <img src="img/anima.png" class="img-fluid" alt="Stop-motion Puppet Animation">
+            <h5 class="work-title mt-3">Stop-motion Puppet Animation</h5>
+            <p>A stop-motion animation created through frame-by-frame shooting of physical puppets.</p>
+          </div>
         </div>
       </div>
-    </section> -->
+    </div>
+    </section>
+   
 
-    <!-- STATEMENT -->
-    <section id="statement">
-      <div class="grid">
-        <h2 style="grid-column:span 12">Concept Statement</h2>
-        <p class="statement">
-          This Portfolio is based on the rational layout of Swiss Web Style, ensuring the clarity and order of
-          information structure. and introduced the spatial narrative logic presented by Apple Vision Pro, Transform
-          the user's scrolling behavior into a "close to object" viewing experience.。
-          <br><br>
-          Works span games, AI visuals, music and puppet animation.
-          Focusing on interaction, perception and technological narratives,
-          Try to think about the possibility of a future where digital works are no longer just browsed, but
-          perceived.。
+
+    <!-- about me -->
+    <section class="statement-section" id="statement">
+    <div class="grid">
+      <h2 class="section-title">About Me</h2>
+
+      <div class="statement-text">
+        <h3 style="color: var(--accent); margin-bottom: 20px;">A sensory storyteller across dimensions </h3>
+        <p>
+          As an explorer in the Department of Multimedia Design, I focus on establishing rigorous <strong>programming
+            logic</strong> and infusing it into my emotional artistic creations. I am committed to blurring the
+          boundaries between digital and reality, constructing a complete sensory system through diverse technical
+          means.
+        </p>
+
+        <div class="skill-categories mt-6">
+          <div class="skill-cat">
+            <span class="work-tag">Space construction / Virtual Realm</span>
+            <p>Unity (Logic), Maya (Modeling), VR Scene Development, AI Visual Generation</p>
+          </div>
+          <div class="skill-cat">
+            <span class="work-tag"> Physical Interation / Physical Bridge</span>
+            <p>Arduino sensor integration, interactive device development, hardware logic design</p>
+          </div>
+          <div class="skill-cat">
+            <span class="work-tag">Digital translation / System & Media</span>
+            <p>Responsive website construction, Acid Pro sound sampling and secondary creation, programming design</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="statement-text" style="grid-column: span 4;">
+        <blockquote style="border-left: 2px solid var(--accent); padding-left: 20px; font-style: italic;">
+          "I'm not just a software user, but a digital architect who uses multi-dimensional tools to create."
+        </blockquote>
+        <p class="mt-4" style="font-size: 1rem;">
+          From building a website from 0 to 1 to carry the mind to developing an immersive VR space to guide viewers, I
+          am good at orchestrating various tools to solve the problem of "how to make the experience more realistic".
         </p>
       </div>
-    </section>
 
-    <section id="contact" class="contact-container">
-      <div class="container">
-        <form id="portfolio-form">
-          <input type="email" placeholder="Your Email" required>
-          <input type="text" placeholder="Your name" required>
-          <textarea placeholder="Message" rows="5">Your message here...</textarea>
-          <input type="file" id="file" name="file" multiple />
-          <button type="submit" class="submit-btn">Send</button>
-        </form>
+      <div class="skill-tree-wrapper" style="grid-column: span 12; margin-top: 60px;">
+        <h3 class="work-tag text-center d-block">Core Skill Tree</h3>
+        <div class="skill-grid">
+          <div class="skill-node" data-skill="Logic">Programming Logic</div>
+          <div class="skill-node" data-skill="Virtual">VR/Unity</div>
+          <div class="skill-node" data-skill="Physical">Arduino</div>
+          <div class="skill-node" data-skill="Web">Web Dev</div>
+          <div class="skill-node" data-skill="Sound">Sound Design</div>
+          <div class="skill-node" data-skill="AI">AI Co-creation</div>
+        </div>
       </div>
-    </section>
+    </div>
+  </section>
+
+    <!-- contact me -->
+    <section class="contact-section" id="contact">
+    <div class="container row justify-content-center ">
+      <h2 class="section-title text-center">Get In Touch</h2>
+
+      <div class="glass-bg-blob"></div>
+
+      <div class="contact-form shadow-lg p-4 rounded">
+        <div class="form-group mb-4">
+          <label class="form-label">Your Name</label>
+          <input type="text" id="contactName" class="form-control text-white" required>
+        </div>
+        <div class="form-group mb-4">
+          <label class="form-label">Your Email</label>
+          <input type="email" id="contactEmail" class="form-control text-white" required>
+        </div>
+        <div class="form-group mb-4">
+          <label class="form-label">Message</label>
+          <textarea id="contactMessage" class="form-control text-white" required></textarea>
+        </div>
+        <div class="text-center">
+          <button type="button" class="submit-btn w-100" id="submitBtn">Send Message</button>
+        </div>
+      </div>
+    </div>
+    </div>
+    </div>
+  </section>
   </main>
 
   <footer>
     <small>
-      Copyright © 2025 s1411222052 Portfolio. All Rights Reserved.
+      Copyright © 2026 Wan Portfolio. All Rights Reserved.
     </small>
   </footer>
 </body>
 <script>
-  // 註冊插件
-  gsap.registerPlugin(ScrollTrigger);
-  gsap.to('#vision', {
-    scale: 6,
-    ease: 'none',
-    scrollTrigger: {
-      trigger: '.pin',
-      start: 'top top',
-      end: 'bottom bottom',
-      scrub: true,
-      pin: true
+   gsap.registerPlugin(ScrollTrigger);
+
+    // 導航欄滾動效果
+    window.addEventListener('scroll', () => {
+      const navbar = document.getElementById('navbar');
+      if (!navbar) return;  //如果這個頁面沒有 navbar，就不要繼續執行下面的邏輯。
+
+      if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    });
+
+    // 漢堡選單
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      mobileMenu.classList.toggle('active');
+    });
+
+    document.querySelectorAll('.mobile-menu a').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        mobileMenu.classList.remove('active');
+      });
+    });
+
+    // Scroll Trigger 
+    const cosmicTimeline = gsap.timeline({
+      scrollTrigger: {
+        trigger: '.cosmic-section',
+        start: 'top top',
+        end: 'bottom bottom',
+        scrub: 1,
+        pin: '.cosmic-container',
+        anticipatePin: 1
+      }
+    });
+
+    // 圖片放大 + 旋轉 + 亮度變化
+    cosmicTimeline.to('#cosmicImage', {
+      scale: 2.5,
+      rotation: 15,
+      filter: 'brightness(1.2)',
+      ease: 'none'
+    });
+
+    // 文字淡入
+    cosmicTimeline.to('#cosmicText', {
+      opacity: 1,
+      y: -50,
+      duration: 0.3
+    }, 0.3);
+
+    // 文字淡出
+    cosmicTimeline.to('#cosmicText', {
+      opacity: 0,
+      y: -100,
+      duration: 0.2
+    }, 0.8);
+
+    // 創建粒子效果
+    function createParticles() {
+      const container = document.querySelector('.cosmic-container');
+      for (let i = 0; i < 30; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.top = Math.random() * 100 + '%';
+        particle.style.animationDelay = Math.random() * 3 + 's';
+        container.appendChild(particle);
+
+        gsap.to(particle, {
+          y: -100,
+          opacity: 0,
+          duration: 2 + Math.random() * 2,
+          repeat: -1,
+          ease: 'none'
+        });
+      }
     }
-  });
+    createParticles();
+
+    // Works 卡片動畫
+    gsap.utils.toArray('.work-card').forEach((card, index) => {
+      gsap.to(card, {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        delay: index * 0.1,
+        scrollTrigger: {
+          trigger: card,
+          start: 'top 80%',
+          toggleActions: 'play none none reverse'
+        }
+      });
+    });
+
+    // Statement 動畫
+    gsap.to('.statement-text', {
+      opacity: 1,
+      y: 0,
+      duration: 1,
+      scrollTrigger: {
+        trigger: '.statement-text',
+        start: 'top 75%',
+        toggleActions: 'play none none reverse'
+      }
+    });
+
+    // 標題捲動亮起動畫
+    gsap.to(".skill-tree-wrapper h3.work-tag", {
+      scrollTrigger: {
+        trigger: ".skill-tree-wrapper",
+        start: "top 70%", // 當區塊進入螢幕 70% 位置時
+        end: "top 30%",
+        toggleActions: "play reverse play reverse",
+      },
+      color: "rgba(255, 255, 255, 1)",
+      duration: 1,
+      ease: "power2.inOut"
+    });
+
+    // Skill Nodes 登場動畫
+    gsap.from(".skill-node", {
+      scrollTrigger: {
+        trigger: ".skill-grid",
+        start: "top 85%", // 當技能網格進入畫面 85% 時觸發
+        toggleActions: "play none none reverse"
+      },
+      scale: 0,          // 從大小 0 開始
+      opacity: 0,        // 從透明開始
+      y: 20,             // 稍微往上漂移
+      duration: 0.6,     // 動畫持續時間
+      stagger: 0.1,      // 每個節點間隔 0.1 秒彈出
+      ease: "back.out(1.7)", // 帶有彈性的登場效果
+      onComplete: () => {
+        // 登場完成後，為所有節點加上微弱的呼吸燈效果
+        gsap.to(".skill-node", {
+          boxShadow: "0 0 15px rgba(94, 231, 255, 0.4)",
+          repeat: -1,
+          yoyo: true,
+          duration: 2,
+          stagger: 0.2
+        });
+      }
+    });
+
+    const wrapper = document.querySelector('.skill-tree-wrapper');
+    const title = wrapper.querySelector('h3.work-tag');
+    const nodes = document.querySelectorAll('.skill-node');
+
+    // 監聽容器內的滑鼠移動
+    wrapper.addEventListener('mousemove', (e) => {
+      const rect = wrapper.getBoundingClientRect();
+
+      // 計算滑鼠相對於容器中心點的偏移 (-0.5 到 0.5)
+      const xRel = (e.clientX - rect.left) / rect.width - 0.5;
+      const yRel = (e.clientY - rect.top) / rect.height - 0.5;
+
+      // 1. 標題：稍微順著滑鼠走 (視覺上像是在深處)
+      gsap.to(title, {
+        x: xRel * 30,
+        y: yRel * 30,
+        z: -60,
+        color: "rgba(255, 255, 255, 1)", // 移動時亮起
+        duration: 0.8,
+        ease: "power2.out"
+      });
+
+      // 2. 節點：逆著滑鼠走 (視覺上像是突出來)
+      nodes.forEach((node, index) => {
+        // 為不同節點增加微妙的層次差
+        const factor = 30 + (index % 3) * 10;
+
+        gsap.to(node, {
+          x: -xRel * factor,
+          y: -yRel * factor,
+          z: 50,
+          rotationY: xRel * 15, // 轉向感
+          rotationX: -yRel * 15,
+          boxShadow: "0 10px 30px rgba(94, 231, 255, 0.3)", // 靠近時陰影變大
+          duration: 0.6,
+          ease: "power2.out"
+        });
+      });
+    });
+
+    // 離開時恢復原狀 (加上一點彈性效果)
+    wrapper.addEventListener('mouseleave', () => {
+      gsap.to(title, {
+        x: 0, y: 0, z: -50,
+        color: "rgba(255, 255, 255, 0.4)", // 恢復調暗
+        duration: 1.2,
+        ease: "power3.out"
+      });
+
+      gsap.to(nodes, {
+        x: 0, y: 0, z: 20,
+        rotationX: 0, rotationY: 0,
+        boxShadow: "0 5px 15px rgba(0,0,0,0.3)",
+        duration: 1.5,
+        ease: "elastic.out(1, 0.5)"
+      });
+    });
+
+    // Contact Form 動畫
+    gsap.to('.contact-form', {
+      opacity: 1,
+      y: 0,
+      duration: 1,
+      scrollTrigger: {
+        trigger: '.contact-form',
+        start: 'top 75%',
+        toggleActions: 'play none none reverse'
+      }
+    });
+
+    // 平滑滾動
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
 
 </script>
 
