@@ -6,27 +6,26 @@ var bodyParser = require("body-parser");
 
 
 server.set("view engine", 'ejs');
-server.set("views", __dirname+"/view")
+server.set("views", __dirname + "/view")
 
 var fileUpload = require("express-fileupload");
 
 server.use(express.static(__dirname + "/public"));
 server.use(bodyParser.urlencoded());
 server.use(bodyParser.json());
-server.use(fileUpload({limits:{fileSize:2*1024*1024}}))
+server.use(fileUpload({ limits: { fileSize: 2 * 1024 * 1024 } }))
 
-var DB=require("nedb-promises");
-var ContactDB = DB.create(__dirname+"/Contact.db");
+var DB = require("nedb-promises");
+var ContactDB = DB.create(__dirname + "/Contact.db");
 
-// server.get("/contact", (req, res) => {
-//     ContactDB.find({}).then(results=>{
-//         res.send(results);
-//     })
-// });
+server.get("/contact", (req, res) => {
+    ContactDB.find({},{"_id":0}).then(results => {
+        res.json(results);
+    })
+});
 
-
-    server.post("/contact", (req, res) => {
-        console.log("收到前端資料:", req.body);
+server.post("/contact", (req, res) => {
+    console.log("收到前端資料:", req.body);
     // 1. 先插入資料
     ContactDB.insert(req.body).then(() => {
         console.log("成功存入資料庫:", doc); // 確認資料庫是否回傳成功物件
@@ -37,7 +36,7 @@ var ContactDB = DB.create(__dirname+"/Contact.db");
     }).catch(err => {
         res.status(500).send("資料庫錯誤");
     });
-}); 
+});
 
 
-server.listen(3001)
+server.listen(8000)
