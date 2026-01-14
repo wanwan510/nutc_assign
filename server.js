@@ -1,41 +1,52 @@
 var express = require("express");
 var server = express();
 var bodyParser = require("body-parser");
-// const Datastore = require('nedb-promise');
-// const db = new Datastore({ filename: 'contacts.db', autoload: true });
+// var DB = require('nedb-promise');
 
+// // const db = new Datastore({ filename: 'contacts.db', autoload: true });
+// node_modules
 
-server.set("view engine", 'ejs');
-server.set("views", __dirname + "/view")
+// server.set("view engine", 'ejs');
+// server.set("views", __dirname + "/view")
 
-var fileUpload = require("express-fileupload");
+// var fileUpload = require("express-fileupload");
 
-server.use(express.static(__dirname + "/public"));
-server.use(bodyParser.urlencoded());
+server.use(express.static(path.join(__dirname + "/public")));
 server.use(bodyParser.json());
-server.use(fileUpload({ limits: { fileSize: 2 * 1024 * 1024 } }))
+server.use(bodyParser.urlencoded({ extended: true }));
+
+// server.use(fileUpload({ limits: { fileSize: 2 * 1024 * 1024 } }))
 
 var DB = require("nedb-promises");
-var ContactDB = DB.create(__dirname + "/Contact.db");
+var ContactDB = DB.create(path.join(__dirname + "/Contact.db"));
 
-server.get("/contact", (req, res) => {
-    ContactDB.find({},{"_id":0}).then(results => {
+//grab data 
+server.get("/contact", async(req, res) => {
+   try {
+        const results = await ContactDB.find({}).projection({ _id: 0 });
         res.json(results);
-    })
+    } catch (err) {
+        res.status(500).json({ error: "Read Error" });
+    }
 });
 
-server.post("/contact", (req, res) => {
-    console.log("收到前端資料:", req.body);
-    // 1. 先插入資料
-    ContactDB.insert(req.body).then(() => {
-        console.log("成功存入資料庫:", doc); // 確認資料庫是否回傳成功物件
-        // 2. 資料插入成功後，再查詢所有結果並回傳
-        return ContactDB.find({});
-    }).then(results => {
-        res.send(results);// 回傳所有聯絡人資料
-    }).catch(err => {
-        res.status(500).send("資料庫錯誤");
-    });
+//store data
+server.post("/contact", async (req, res) => {
+    const { name, email, message } = req.body;
+    
+    // 簡單檢查必填欄位
+    if (!name || !email || !message) {
+        return res.status(400).json({ error: "所有欄位皆為必填" });
+    }
+
+    try {
+        // 只要有 bodyParser.json()，這裡就能拿到文字資料
+        const newDoc = await ContactDB.insert(req.body);
+        const allContacts = await ContactDB.find({}).projection({ _id: 0 });
+        res.status(201).json(allContacts); 
+    } catch (err) {
+        res.status(500).json({ error: "Save Error" });
+    }
 });
 
 
