@@ -67,32 +67,32 @@
       <div class="container">
         <div class="row g-4 justify-content-center ">
 
-          <div class="col-6 col-md-6 text-center">
-            <div class="work-item">
+          <div class="col-md-6 text-center">
+            <div class="work-item" id="work1">
               <img src="img/ai-comp.jpg" class="img-fluid" alt="AI Competition">
               <h5 class="work-title mt-3">AI Art Competition</h5>
               <p>Second Place in DAO Arena: AI Creation contest</p>
             </div>
           </div>
 
-          <div class="col-6 col-md-6 text-center">
-            <div class="work-item">
+          <div class=" col-md-6 text-center">
+            <div class="work-item" id="work2">
               <img src="img/remix.png" class="card-img-top" alt="Music Remix Project">
               <h5 class="work-title mt-3 ">Music Remix Project</h5>
               <p> A derivative work featuring a rearranged instrumental track and added sound effects.</p>
             </div>
           </div>
 
-          <div class="col-6 col-md-6 text-center">
-            <div class="work-item">
+          <div class="col-md-6 text-center">
+            <div class="work-item" id="work3">
               <img src="img/game.png" class="img-fluid" alt="Symbol-based Mini Game">
               <h5 class="work-title mt-3">Symbol-based Mini Game</h5>
               <p>Interactive mini-game utilizing gesture and symbol recognition as core mechanics.</p>
             </div>
           </div>
 
-          <div class="col-6 col-md-6 text-center">
-            <div class="work-item">
+          <div class="col-md-6 text-center">
+            <div class="work-item" id="work4">
               <img src="img/anima.png" class="img-fluid" alt="Stop-motion Puppet Animation">
               <h5 class="work-title mt-3">Stop-motion Puppet Animation</h5>
               <p>A stop-motion animation created through frame-by-frame shooting of physical puppets.</p>
@@ -169,15 +169,15 @@
         <div class="contact-form shadow-lg p-4 rounded">
           <div class="form-group mb-4">
             <label class="form-label">Your Name</label>
-            <input type="text" id="contactName" class="form-control text-white" required>
+            <input v-model="contactName" type="text" id="contactName" class="form-control text-white" required>
           </div>
           <div class="form-group mb-4">
             <label class="form-label">Your Email</label>
-            <input type="email" id="contactEmail" class="form-control text-white" required>
+            <input v-model="contactEmail" type="email" id="contactEmail" class="form-control text-white" required>
           </div>
           <div class="form-group mb-4">
             <label class="form-label">Message</label>
-            <textarea id="contactMessage" class="form-control text-white" required></textarea>
+            <textarea v-model="contactMessage" id="contactMessage" class="form-control text-white" required></textarea>
           </div>
           <div class="text-center">
             <button type="button" class="submit-btn w-100" id="submitBtn">Send Message</button>
