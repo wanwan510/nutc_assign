@@ -14,34 +14,32 @@ var contactApp = createApp({
         }
     },
     methods: {
+        fetchContacts() {
+            // 取得所有留言訊息
+            $.get("/contact", (result) => {
+                this.contacts = result;
+            });
+        },
+
         submitForm() {
             // 使用 jQuery AJAX 傳送資料
             $.ajax({
                 url: "/contact",
                 method: "post",
-                data: this.form, // 傳送內容只有 name, email, message
+                contentType: "application/json",
+                data: JSON.stringify(this.form),
+                // dataType: "json", // 傳送內容只有 name, email, message
                 success: (result) => {
                     this.status = "ok";
+                    this.form = { name: "", email: "", message: "" };// 清空表單
                     this.fetchContacts(); // 成功後更新列表
-                    // 清空表單
-                    this.form = { name: "", email: "", message: "" };
                 },
                 error: (err) => {
                     this.status = "error";
                 }
             });
-        },
-        fetchContacts() {
-            // 取得所有留言訊息
-            $.ajax({
-                url: "/contact", // 假設後端 GET /contact 回傳所有資料
-                method: "get",
-                dataType: "json",
-                success: (result) => {
-                    this.contacts = result;
-                }
-            });
         }
+
     },
     mounted() {
         this.fetchContacts(); // 頁面載入時先獲取一次資料

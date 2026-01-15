@@ -1,24 +1,22 @@
 var express = require("express");
 var server = express();
-var bodyParser = require("body-parser");
+// var bodyParser = require("body-parser");
 
 server.use(express.static(__dirname + "/public"));
-server.use(bodyParser.urlencoded());
 server.use(bodyParser.json());
+server.use(bodyParser.urlencoded());
+
 
 
 var DB = require("nedb-promises");
 var ContactDB = DB.create(__dirname + "/Contact.db");
 
-//grab data 
-// server.get("/contact", async(req, res) => {
-//    try {
-//         const results = await ContactDB.find({});;
-//         res.json(results);
-//     } catch (err) {
-//         res.status(500).json({ error: "Read Error" });
-//     }
-// });
+//grab data
+server.get("/contact", (req, res) => {
+    ContactDB.find({}).sort({ createdAt: -1 })
+        .then(data => res.json(data));
+        
+});
 
 //post data=send data in to create/modify resources,i.e. form submission, file upload
 server.post("/contact", (req, res) => {
@@ -33,11 +31,7 @@ server.post("/contact", (req, res) => {
 });
 
 
-//grab data
-server.get("/messages", (req, res) => {
-    ContactDB.find({}).sort({ createdAt: -1 })
-        .then(data => res.json(data));
-});
+
 
 
 
