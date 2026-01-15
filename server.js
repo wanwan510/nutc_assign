@@ -1,54 +1,45 @@
 var express = require("express");
 var server = express();
 var bodyParser = require("body-parser");
-var path = require("path");
-// var DB = require('nedb-promise');
 
-// // const db = new Datastore({ filename: 'contacts.db', autoload: true });
-// node_modules
-
-// server.set("view engine", 'ejs');
-// server.set("views", __dirname + "/view")
-
-// var fileUpload = require("express-fileupload");
-
-server.use(express.static(path.join(__dirname + "/public")));
+server.use(express.static(__dirname + "/public"));
+server.use(bodyParser.urlencoded());
 server.use(bodyParser.json());
-server.use(bodyParser.urlencoded({ extended: true }));
 
-// server.use(fileUpload({ limits: { fileSize: 2 * 1024 * 1024 } }))
 
 var DB = require("nedb-promises");
-var ContactDB = DB.create(path.join(__dirname + "/Contact.db"));
+var ContactDB = DB.create(__dirname + "/Contact.db");
 
 //grab data 
-server.get("/contact", async(req, res) => {
-   try {
-        const results = await ContactDB.find({});;
-        res.json(results);
-    } catch (err) {
-        res.status(500).json({ error: "Read Error" });
-    }
-});
+// server.get("/contact", async(req, res) => {
+//    try {
+//         const results = await ContactDB.find({});;
+//         res.json(results);
+//     } catch (err) {
+//         res.status(500).json({ error: "Read Error" });
+//     }
+// });
 
-//store data
-server.post("/contact", async (req, res) => {
+//post data=send data in to create/modify resources,i.e. form submission, file upload
+server.post("/contact", (req, res) => {
+
     const { name, email, message } = req.body;
-    
-    // 簡單檢查必填欄位
-    if (!name || !email || !message) {
-        return res.status(400).json({ error: "所有欄位皆為必填" });
-    }
 
-    try {
-        // 只要有 bodyParser.json()，這裡就能拿到文字資料
-        const newDoc = await ContactDB.insert(req.body);
-        const allContacts = await ContactDB.find({}).projection({ _id: 0 });
-        res.status(201).json(allContacts); 
-    } catch (err) {
-        res.status(500).json({ error: "Save Error" });
-    }
+    //add to database,createdAt=time for send message
+
+    ContactDB.insert({ name, email, message, createdAt: new Date() })
+        .then(() => res.json({ status: "ok" }))
+        .catch(() => res.status(500).json({ status: "error" }));
 });
+
+
+//grab data
+server.get("/messages", (req, res) => {
+    ContactDB.find({}).sort({ createdAt: -1 })
+        .then(data => res.json(data));
+});
+
+
 
 
 server.listen(8000)

@@ -1,59 +1,49 @@
 const { createApp } = Vue;
 
-const ContactApp = createApp({
+var contactApp = createApp({
     data() {
         return {
+            // 1. 限制傳送內容：名字、電郵、信息
             form: {
                 name: "",
                 email: "",
                 message: ""
             },
-            contacts: [], // 存放從伺服器抓回的陣列
-            status: ""    // 狀態控制：ok, error
-        };
-    },
-    methods: {
-        // 使用 fetch 獲取資料
-        async fetchContacts() {
-            try {
-                const response = await fetch("/contact");
-                if (!response.ok) throw new Error("網路回應不正常");
-                const data = await response.json();
-                this.contacts = data;
-            } catch (error) {
-                console.error("獲取資料失敗:", error);
-            }
-        },
-
-        // 使用 fetch 送出資料
-        async submitForm() {
-            try {
-                const response = await fetch("/contact", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify(this.form)
-                });
-
-                if (!response.ok) throw new Error("送出失敗");
-
-                const result = await response.json();
-                this.contacts = result; // 後端回傳最新清單
-                this.status = "ok";
-
-                // 清空表單
-                this.form.name = "";
-                this.form.email = "";
-                this.form.message = "";
-            } catch (error) {
-                console.error("送出錯誤:", error);
-                this.status = "error";
-            }
+            contacts: [], // 儲存下方列表資料
+            status: ""    // 控制顯示成功或失敗訊息
         }
     },
-    // Vue 實體掛載後立即執行
+    methods: {
+        submitForm() {
+            // 使用 jQuery AJAX 傳送資料
+            $.ajax({
+                url: "/contact",
+                method: "post",
+                data: this.form, // 傳送內容只有 name, email, message
+                success: (result) => {
+                    this.status = "ok";
+                    this.fetchContacts(); // 成功後更新列表
+                    // 清空表單
+                    this.form = { name: "", email: "", message: "" };
+                },
+                error: (err) => {
+                    this.status = "error";
+                }
+            });
+        },
+        fetchContacts() {
+            // 取得所有留言訊息
+            $.ajax({
+                url: "/contact", // 假設後端 GET /contact 回傳所有資料
+                method: "get",
+                dataType: "json",
+                success: (result) => {
+                    this.contacts = result;
+                }
+            });
+        }
+    },
     mounted() {
-        this.fetchContacts();
+        this.fetchContacts(); // 頁面載入時先獲取一次資料
     }
 }).mount("#contactApp");
