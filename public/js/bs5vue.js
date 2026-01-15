@@ -52,7 +52,7 @@ const ContactApp = createApp({
             }
         }
     },
-    // 生命週期掛鉤：Vue 實體掛載後立即執行
+    // Vue 實體掛載後立即執行
     mounted() {
         this.fetchContacts();
     }

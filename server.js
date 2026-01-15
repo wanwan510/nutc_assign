@@ -1,6 +1,7 @@
 var express = require("express");
 var server = express();
 var bodyParser = require("body-parser");
+var path = require("path");
 // var DB = require('nedb-promise');
 
 // // const db = new Datastore({ filename: 'contacts.db', autoload: true });
@@ -23,7 +24,7 @@ var ContactDB = DB.create(path.join(__dirname + "/Contact.db"));
 //grab data 
 server.get("/contact", async(req, res) => {
    try {
-        const results = await ContactDB.find({}).projection({ _id: 0 });
+        const results = await ContactDB.find({});;
         res.json(results);
     } catch (err) {
         res.status(500).json({ error: "Read Error" });

@@ -2,3 +2,37 @@ https://www.tpisoftware.com/tpu/articleDetails/2826
 https://codepen.io/tlilecode/pen/joZezP
 https://codepen.io/jtrancozo/pen/mEoEVw
 https://www.npmjs.com/package/nedb-promises?activeTab=readme 
+ document.getElementById('submitBtn').addEventListener('click', async function () {
+    // 1. 抓取 HTML 中的輸入值
+    const formData = {
+      name: document.getElementById('contactName').value,
+      email: document.getElementById('contactEmail').value,
+      message: document.getElementById('contactMessage').value
+    };
+
+    // 簡單驗證
+    if (!formData.name || !formData.email) return alert("請填寫姓名與電子郵件");
+
+    try {
+      // 2. 發送到後端 3000 Port 的 /contact 路徑
+      const response = await fetch('/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData) // 將物件轉為 JSON 字串
+      });
+
+      // 3. 接收後端傳回的 results (所有聯絡資料)
+      const allContacts = await response.json();
+
+      console.log("資料庫目前的內容：", allContacts);
+
+      // 4. 成功回饋動畫 (可結合你的 GSAP)
+      alert("發送成功！後端已回傳最新資料庫狀態。");
+
+      // 清空輸入框
+      document.querySelectorAll('.form-group input, textarea').forEach(el => el.value = "");
+
+    } catch (error) {
+      console.error("發送失敗:", error);
+    }
+  });

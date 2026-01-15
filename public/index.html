@@ -19,7 +19,7 @@
   <!-- vue3 -->
   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-  <script src="js/bs5vue.js"></script>
+  
   <!-- custom css -->
   <link rel="stylesheet" href="css/style.css">
 </head>
@@ -203,7 +203,7 @@
               </li>
             </ul>
           </div>
-
+        </div>
         </div>
     </section>
 
@@ -214,6 +214,7 @@
       Copyright © 2026 Wan Portfolio. All Rights Reserved.
     </small>
   </footer>
+  <script src="js/bs5vue.js"></script>
 </body>
 <script>
   gsap.registerPlugin(ScrollTrigger);
@@ -275,7 +276,7 @@
 
   // 文字淡出
   cosmicTimeline.to('#cosmicText', {
-    opacity: 0,
+    opacity: 1,
     y: -100,
     duration: 0.2
   }, 0.8);
@@ -437,40 +438,6 @@
     }
   });
 
-  document.getElementById('submitBtn').addEventListener('click', async function () {
-    // 1. 抓取 HTML 中的輸入值
-    const formData = {
-      name: document.getElementById('contactName').value,
-      email: document.getElementById('contactEmail').value,
-      message: document.getElementById('contactMessage').value
-    };
-
-    // 簡單驗證
-    if (!formData.name || !formData.email) return alert("請填寫姓名與電子郵件");
-
-    try {
-      // 2. 發送到後端 3000 Port 的 /contact 路徑
-      const response = await fetch('/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData) // 將物件轉為 JSON 字串
-      });
-
-      // 3. 接收後端傳回的 results (所有聯絡資料)
-      const allContacts = await response.json();
-
-      console.log("資料庫目前的內容：", allContacts);
-
-      // 4. 成功回饋動畫 (可結合你的 GSAP)
-      alert("發送成功！後端已回傳最新資料庫狀態。");
-
-      // 清空輸入框
-      document.querySelectorAll('.form-group input, textarea').forEach(el => el.value = "");
-
-    } catch (error) {
-      console.error("發送失敗:", error);
-    }
-  });
 
   // 平滑滾動
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
